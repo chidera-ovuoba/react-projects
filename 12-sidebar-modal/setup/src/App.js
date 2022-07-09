@@ -4,10 +4,12 @@ import Sidebar from './Sidebar'
 import Home from './Home'
 function App() {
   return (
-    <>
-      <h2>modal-sidebar project setup</h2>
+    <> 
+      <Home />
+      <Modal />
+       <Sidebar />
     </>
   )
-}
+} 
 
 export default App
