@@ -7,20 +7,24 @@ const Submenu = () => {
   const refContainer = useRef(null);
   console.log(position);
   // console.log(page,links)
-
+ 
   useEffect(() => {
     refContainer.current.style.left = `${(left + right) / 2}px`
     refContainer.current.style.top = `${bottom - 3}px`
   },[left,right,bottom])
 
   return <>
-    <div className={`submenu ${mouse ? 'show': ''}`} ref={refContainer}>
-      <div className={`submenu-center col-${links.length}`}>
+    <div className={`submenu ${mouse ? 'show' : ''}`} ref={refContainer}
+      
+    >
+      <div>
         <h4>{page}</h4>
+        <div  className={`submenu-center col-${links.length}`}>
         {links.map((item, i) => {
           const { label, icon, url } = item;
           return <a href={url} key={i}>{icon}{label}</a>  
         })}
+          </div>
       </div>
     </div>
   </>

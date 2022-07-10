@@ -4,13 +4,18 @@ import { FaBars } from 'react-icons/fa';
 import { useGlobalContext } from './context';
 
 const Navbar = () => {
-  const { onMouse, openSidebar } = useGlobalContext();
+  const { onMouse, openSidebar,setMouse} = useGlobalContext();
   
+  const handleSubmenu = (e) => {
+    if (!e.target.classList.contains('link-btn')) {
+      setMouse(false);
+    }
+  }
   return <>
-    <nav className="nav">
+    <nav className="nav" onMouseOver={handleSubmenu}>
       <div className="nav-center">
     <div className="nav-header">
-        <img src={logo} alt="" />
+        <img src={logo} alt="" className='nav-logo'/>
         <button className="btn toggle-btn" onClick={openSidebar}><FaBars /></button>
         </div>
         <ul className="nav-links">

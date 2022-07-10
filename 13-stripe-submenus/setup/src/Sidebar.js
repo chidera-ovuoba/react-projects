@@ -5,21 +5,21 @@ import { useGlobalContext } from './context';
 const Sidebar = () => {
   const { closeSidebar,sidebar} = useGlobalContext();
   return <>
-    
+     
     <div className={`sidebar-wrapper ${sidebar ? 'show':''}`}>
       <div className="sidebar">
         <button className="close-btn" onClick={closeSidebar}>
           <FaTimes/>
         </button>
-        <article>
+        <article className='sidebar-links'>
           {sublinks.map((item,i) => {
             const {page,links} = item
             return <div key={i}>
-             {page}
+             <h4>{page}</h4>
               <div className="sidebar-sublinks">
                 {links.map((item, i) => {
                   const { label, icon, url } = item;
-                  return <a href={url}>{icon}{label}</a>
+                  return <a href={url} key={i}>{icon}{label}</a>
                })}
               </div>
               </div>
