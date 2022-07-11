@@ -4,7 +4,14 @@ import { Link } from 'react-router-dom'
 const Error = () => {
   return (
     <div>
-      <h2>error page</h2>
+      <div className="error-page">
+        <div className="error-container">
+          <h2>Oops! It's A Dead End</h2>
+          <Link className="btn btn-primary" to='/'>
+          Back Home
+          </Link>
+        </div>
+      </div>
     </div>
   )
 }

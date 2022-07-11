@@ -5,7 +5,57 @@ const url = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s='
 const AppContext = React.createContext()
 
 const AppProvider = ({ children }) => {
-  return <AppContext.Provider value='hello'>{children}</AppContext.Provider>
+  const [cocktails, setCocktails] = useState([]);
+  const [searchterm, setSearchterm] = useState('a');
+  const [loading, setLoading] = useState(false);
+  
+  const fetchData = useCallback(async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(`${url}${searchterm}`);
+      const data = await response.json();
+      const { drinks } = data;
+      if (drinks) {
+      const newCocktails = drinks.map((item) => {
+          const {
+            idDrink,
+            strDrink,
+            strDrinkThumb,
+            strAlcoholic,
+            strGlass,
+          } = item
+
+          return {
+            id: idDrink,
+            name: strDrink,
+            image: strDrinkThumb,
+            info: strAlcoholic,
+            glass: strGlass,
+          }
+        })
+        setCocktails(newCocktails)
+       setLoading(false)
+      } else {
+        setCocktails([])
+          setLoading(false)
+      }
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+
+    }
+  },
+    [searchterm]
+  )
+  
+  useEffect(() => {
+    fetchData()
+    }, [searchterm,setSearchterm]);
+  
+
+  return <AppContext.Provider value={{cocktails,loading,searchterm,setSearchterm}}>
+    
+    {children}</AppContext.Provider>
 }
 // make sure use
 export const useGlobalContext = () => {
