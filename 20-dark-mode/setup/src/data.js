@@ -6,7 +6,7 @@ const articles = [
     length: 11,
     snippet: `Come waste your time with me`,
   },
-  {
+  { 
     id: 2,
     title: 'goodby, clean code',
     date: new Date(2019, 10, 22),
