@@ -11,12 +11,30 @@ import reducer from './reducer'
 
 const API_ENDPOINT = 'https://hn.algolia.com/api/v1/search?'
 
-const initialState = {}
+
+const initialState = {
+  loading: false  
+}
 
 const AppContext = React.createContext()
 
 const AppProvider = ({ children }) => {
-  return <AppContext.Provider value='hello'>{children}</AppContext.Provider>
+  const [state, dispatch] = useReducer(initialState);
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(API_ENDPOINT);
+      const data = await response.json();
+      console.log(data);
+    }
+    fetchData();
+  },[])
+
+
+  return <AppContext.Provider
+    
+  value={{}}
+  
+  >{children}</AppContext.Provider>
 }
 // make sure use
 export const useGlobalContext = () => {
